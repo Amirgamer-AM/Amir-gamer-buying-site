@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AMIR GAMER</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#05070b;color:#fff;font-family:Tahoma,Arial,sans-serif}
+button,input,textarea{font-family:inherit}
+header{position:sticky;top:0;z-index:10;background:#080b11ee;backdrop-filter:blur(12px);border-bottom:1px solid #202735}
+.nav{max-width:1200px;margin:auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-size:22px;font-weight:900}.logo span{color:#00e5ff}
+nav{display:flex;gap:5px;flex-wrap:wrap}
+nav button{background:none;border:0;color:#aeb7c4;padding:10px}
+nav button:hover{color:#00e5ff}
+.cart{border:0;border-radius:10px;padding:11px 15px;background:#00e5ff;font-weight:bold}
+.hero{text-align:center;padding:90px 20px;max-width:1000px;margin:auto}
+.badge{color:#00e5ff;background:#0b171d;border:1px solid #164653;padding:8px 15px;border-radius:30px;display:inline-block}
+h1{font-size:clamp(42px,9vw,80px);margin:20px 0}
+h1 span{color:#00e5ff}
+.hero p{max-width:700px;margin:auto;color:#a5afbc;line-height:2}
+.btns{margin-top:28px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.primary,.secondary{padding:13px 20px;border-radius:11px;font-weight:bold}
+.primary{border:0;background:#00e5ff;color:#001014}
+.secondary{border:1px solid #27313e;background:#111720;color:#fff}
+section{max-width:1200px;margin:auto;padding:55px 20px}
+.title{text-align:center;margin-bottom:30px}.title p{color:#858f9d}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card{background:#0b1017;border:1px solid #202a36;border-radius:17px;padding:23px}
+.card:hover{border-color:#00c9df}
+.tag{font-size:11px;color:#00e5ff;background:#101c24;padding:5px 9px;border-radius:7px}
+.card p{color:#929daa;line-height:1.8}
+.price{font-size:23px;font-weight:900;color:#00e5ff;margin:18px 0}
+.add{width:100%;padding:12px;border:0;border-radius:10px;background:#00e5ff;font-weight:bold}
+.news{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.newsbox{background:#0b1017;border:1px solid #202a36;border-radius:15px;padding:20px}
+.newsbox p{color:#9ba5b2;line-height:1.8}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.feature{text-align:center;padding:25px;background:#0b1017;border:1px solid #202a36;border-radius:15px}
+.feature p{color:#8993a1;font-size:13px;line-height:1.7}
+footer{text-align:center;border-top:1px solid #202735;padding:35px;color:#8993a1}
+footer strong{color:#00e5ff}
+.overlay{display:none;position:fixed;inset:0;background:#000b;z-index:50}
+.modal{background:#0b1017;border:1px solid #26313f;border-radius:18px;width:min(550px,92%);max-height:90vh;overflow:auto;margin:5vh auto;padding:22px}
+.modalhead{display:flex;justify-content:space-between;align-items:center}
+.close{border:0;background:#18202a;color:#fff;border-radius:8px;width:35px;height:35px}
+.cartitem{display:flex;justify-content:space-between;gap:10px;padding:15px 0;border-bottom:1px solid #202735}
+.remove{background:#35151b;color:#ff7785;border:0;padding:7px;border-radius:7px}
+.total{margin:20px 0;padding:15px;background:#101923;border-radius:10px;display:flex;justify-content:space-between}
+input,textarea{width:100%;background:#070a0f;color:#fff;border:1px solid #293442;border-radius:9px;padding:12px;margin:7px 0 13px}
+textarea{min-height:100px}
+label{font-size:13px;color:#aab3bf}
+#admin{display:none}
+.admin{max-width:1200px;margin:auto;padding:30px 20px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.stat,.adminbox{background:#0b1017;border:1px solid #202a36;border-radius:15px;padding:20px}
+.stat small{color:#87919d}.stat b{display:block;color:#00e5ff;font-size:28px;margin-top:8px}
+.adminbox{margin-top:20px}
+.order{border:1px solid #26313e;border-radius:12px;padding:15px;margin:10px 0}
+.order p{color:#a8b0bc}
+.status{padding:5px 8px;border-radius:6px;font-size:11px}
+.pending{background:#332b0d;color:#ffe477}.accepted{background:#103522;color:#69ffab}.rejected{background:#36151b;color:#ff7d8b}
+.adminbuttons{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap}
+.adminbuttons button{border:0;padding:8px 11px;border-radius:7px}
+.ok{background:#123c29;color:#6effad}.no{background:#3c151b;color:#ff7d89}.del{background:#252c35;color:#fff}
+@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}.features,.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:550px){.nav{flex-wrap:wrap}nav{width:100%;justify-content:center}.grid,.news,.features,.stats{grid-template-columns:1fr}.hero{padding:60px 15px}section{padding:40px 15px}}
+</style>
+</head>
+<body>
+
+<div id="site">
+
+<header>
+<div class="nav">
+<div class="logo">AMIR <span>GAMER</span></div>
+<nav>
+<button onclick="scrollToId('home')">خانه</button>
+<button onclick="scrollToId('servers')">سرورها</button>
+<button onclick="scrollToId('sites')">ساخت سایت</button>
+<button onclick="scrollToId('news')">اخبار</button>
+<button onclick="login()">مدیریت</button>
+</nav>
+<button class="cart" onclick="openCart()">🛒 سبد خرید (<span id="count">0</span>)</button>
+</div>
+</header>
+
+<div id="home">
+<div class="hero">
+<div class="badge">⚡ GAMING SERVICES</div>
+<h1>AMIR <span>GAMER</span></h1>
+<p>
+مرکز خدمات گیمینگ و طراحی سایت؛
+از سفارش سرور ماینکرفت تا طراحی سایت‌های معمولی، عالی و حرفه‌ای،
+همه در یک محیط سریع و مدرن.
+</p>
+<div class="btns">
+<button class="primary" onclick="scrollToId('servers')">🖥️ خرید سرور</button>
+<button class="secondary" onclick="scrollToId('sites')">🌐 ساخت سایت</button>
+</div>
+</div>
+
+<section>
+<div class="title">
+<h2>🚀 امکانات AMIR GAMER</h2>
+<p>یک محیط کامل برای خدمات گیمینگ و طراحی وب</p>
+</div>
+<div class="features">
+<div class="feature"><h3>⚡ سریع</h3><p>ثبت سفارش ساده و سریع</p></div>
+<div class="feature"><h3>🎮 گیمینگ</h3><p>طراحی اختصاصی با فضای گیمینگ</p></div>
+<div class="feature"><h3>📱 موبایل</h3><p>سازگار با گوشی و لپ‌تاپ</p></div>
+<div class="feature"><h3>🛠️ مدیریت</h3><p>مدیریت سفارش‌ها و اخبار</p></div>
+</div>
+</section>
+</div>
+
+<section id="servers">
+<div class="title"><h2>🖥️ سرورهای ماینکرفت</h2><p>پلن موردنظر خود را انتخاب کنید.</p></div>
+<div class="grid" id="serversList"></div>
+</section>
+
+<section id="sites">
+<div class="title"><h2>🌐 طراحی سایت</h2><p>سفارش طراحی سایت با امکانات مختلف</p></div>
+<div class="grid">
+<div class="card">
+<span class="tag">WEBSITE</span><h3>سایت معمولی</h3>
+<p>یک سایت ساده و کاربردی برای شروع.</p>
+<div class="price">۳,۰۰۰,۰۰۰ تومان</div>
+<button class="add" onclick="add('سایت معمولی',3000000)">🛒 افزودن</button>
+</div>
+
+<div class="card">
+<span class="tag">WEBSITE</span><h3>سایت عالی</h3>
+<p>طراحی حرفه‌ای‌تر با امکانات بیشتر.</p>
+<div class="price">۶,۰۰۰,۰۰۰ تومان</div>
+<button class="add" onclick="add('سایت عالی',6000000)">🛒 افزودن</button>
+</div>
+
+<div class="card">
+<span class="tag">PRO</span><h3>سایت پرو + امکانات</h3>
+<p>پکیج حرفه‌ای با امکانات پیشرفته.</p>
+<div class="price">۱۰,۰۰۰,۰۰۰ تومان</div>
+<button class="add" onclick="add('سایت پرو + امکانات',10000000)">🛒 افزودن</button>
+</div>
+</div>
+</section>
+
+<section id="news">
+<div class="title"><h2>📰 اخبار</h2><p>آخرین اطلاعیه‌های AMIR GAMER</p></div>
+<div class="news" id="newsList"></div>
+</section>
+
+<footer>
+<strong>By Amir Gamer</strong><br>
+سازنده: امیرگیمر<br>
+<div style="margin-top:10px">پشتیبانی در اپلیکیشن بله: ۰۹۳۰۳۳۳۲۴۷۶</div>
+</footer>
+</div>
+
+<!-- سبد خرید -->
+<div class="overlay" id="cartBox">
+<div class="modal">
+<div class="modalhead"><h2>🛒 سبد خرید</h2><button class="close" onclick="closeModal('cartBox')">×</button></div>
+<div id="items"></div>
+<div class="total"><span>مجموع</span><b id="total">۰ تومان</b></div>
+<button class="primary" style="width:100%" onclick="orderForm()">📦 ثبت سفارش</button>
+</div>
+</div>
+
+<!-- ثبت سفارش -->
+<div class="overlay" id="orderBox">
+<div class="modal">
+<div class="modalhead"><h2>📦 ثبت سفارش</h2><button class="close" onclick="closeModal('orderBox')">×</button></div>
+<label>نام</label><input id="name" placeholder="نام شما">
+<label>شماره تماس</label><input id="phone" placeholder="شماره تماس">
+<label>توضیحات</label><textarea id="note" placeholder="توضیحات سفارش"></textarea>
+<button class="primary" style="width:100%" onclick="submitOrder()">ارسال سفارش</button>
+</div>
+</div>
+
+<!-- ورود مدیریت -->
+<div class="overlay" id="loginBox">
+<div class="modal">
+<div class="modalhead"><h2>🔐 مدیریت</h2><button class="close" onclick="closeModal('loginBox')">×</button></div>
+<label>رمز مدیریت</label>
+<input type="password" id="pass" placeholder="رمز مدیریت">
+<button class="primary" style="width:100%" onclick="checkLogin()">ورود</button>
+</div>
+</div>
+
+<!-- پنل -->
+<div id="admin">
+<div class="admin">
+<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap">
+<div><h1>AMIR GAMER ADMIN</h1><p style="color:#87919d">مدیریت سایت</p></div>
+<button class="secondary" onclick="exitAdmin()">بازگشت</button>
+</div>
+
+<div class="stats">
+<div class="stat"><small>کل سفارش‌ها</small><b id="s1">0</b></div>
+<div class="stat"><small>در انتظار</small><b id="s2">0</b></div>
+<div class="stat"><small>تأیید شده</small><b id="s3">0</b></div>
+<div class="stat"><small>رد شده</small><b id="s4">0</b></div>
+</div>
+
+<div class="adminbox">
+<h2>📦 سفارش‌ها</h2>
+<div id="orders"></div>
+</div>
+
+<div class="adminbox">
+<h2>🖥️ مدیریت سرورها</h2>
+<label>نام سرور</label>
+<input id="serverName" placeholder="نام سرور">
+<label>قیمت</label>
+<input id="serverPrice" type="number" placeholder="قیمت به تومان">
+<button class="primary" onclick="addServer()">➕ اضافه کردن</button>
+<div id="adminServers"></div>
+</div>
+
+<div class="adminbox">
+<h2>📰 مدیریت اخبار</h2>
+<label>عنوان</label>
+<input id="newsTitle" placeholder="عنوان خبر">
+<label>متن</label>
+<textarea id="newsText" placeholder="متن خبر"></textarea>
+<button class="primary" onclick="addNews()">➕ انتشار خبر</button>
+<div id="adminNews"></div>
+</div>
+
+</div>
+</div>
+
+<script>
+const defaultServers=[
+{name:"سرور ۵ دقیقه‌ای",price:2000000},
+{name:"سرور ۱۰ دقیقه‌ای",price:4000000},
+{name:"سرور ۱۵ دقیقه‌ای",price:6000000},
+{name:"سرور ۳۰ دقیقه‌ای",price:8000000},
+{name:"سرور ۱ ساعته",price:10000000}
+];
+
+let servers=JSON.parse(localStorage.getItem("servers"))||defaultServers;
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
+let orders=JSON.parse(localStorage.getItem("orders"))||[];
+let news=JSON.parse(localStorage.getItem("news"))||[
+{title:"🚨 اطلاعیه",text:"به بخش اخبار AMIR GAMER خوش آمدید.",date:new Date().toLocaleDateString("fa-IR")}
+];
+
+function save(){
+localStorage.setItem("servers",JSON.stringify(servers));
+localStorage.setItem("cart",JSON.stringify(cart));
+localStorage.setItem("orders",JSON.stringify(orders));
+localStorage.setItem("news",JSON.stringify(news));
+}
+
+function money(n){return Number(n).toLocaleString("fa-IR")+" تومان"}
+
+function renderServers(){
+serversList.innerHTML=servers.map((x,i)=>`
+<div class="card">
+<span class="tag">SERVER</span>
+<h3>${x.name}</h3>
+<p>سرویس سرور ماینکرفت با مدت زمان انتخابی.</p>
+<div class="price">${money(x.price)}</div>
+<button class="add" onclick="add('${x.name}',${x.price})">🛒 افزودن</button>
+</div>`).join("");
+}
+
+function renderNews(){
+newsList.innerHTML=news.map(x=>`
+<div class="newsbox">
+<h3>${x.title}</h3>
+<p>${x.text}</p>
+<small style="color:#00e5ff">${x.date}</small>
+</div>`).join("");
+}
+
+function add(name,price){
+cart.push({name,price});
+save();updateCart();
+alert("محصول به سبد خرید اضافه شد.");
+}
+
+function updateCart(){
+count.textContent=cart.length;
+let total=cart.reduce((a,x)=>a+x.price,0);
+document.getElementById("total").textContent=money(total);
+
+items.innerHTML=cart.length?cart.map((x,i)=>`
+<div class="cartitem">
+<div><b>${x.name}</b><br><span style="color:#00e5ff">${money(x.price)}</span></div>
+<button class="remove" onclick="removeItem(${i})">حذف</button>
+</div>`).join(""):"<p style='text-align:center;color:#8993a1;padding:25px'>سبد خرید خالی است.</p>";
+}
+
+function removeItem(i){
+cart.splice(i,1);save();updateCart();
+}
+
+function openCart(){
+cartBox.style.display="block";updateCart();
+}
+
+function orderForm(){
+if(!cart.length)return alert("سبد خرید خالی است.");
+closeModal("cartBox");
+orderBox.style.display="block";
+}
+
+function submitOrder(){
+let n=name.value.trim(),p=phone.value.trim(),nt=note.value.trim();
+if(!n||!p)return alert("نام و شماره تماس را وارد کنید.");
+
+orders.unshift({
+id:Date.now(),
+name:n,
+phone:p,
+note:nt,
+items:[...cart],
+total:cart.reduce((a,x)=>a+x.price,0),
+status:"pending",
+date:new Date().toLocaleString("fa-IR")
+});
+
+cart=[];save();updateCart();closeModal("orderBox");
+name.value="";phone.value="";note.value="";
+alert("✅ سفارش ثبت شد و برای مدیریت ارسال شد.");
+}
+
+function closeModal(id){document.getElementById(id).style.display="none"}
+
+function scrollToId(id){
+document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+function login(){
+document.getElementById("loginBox").style.display="block";
+}
+
+function checkLogin(){
+/*
+  برای امنیت واقعی، رمز نباید در HTML/JS باشد.
+  این قسمت فقط جای اتصال احراز هویت سرور است.
+*/
+alert("برای فعال کردن ورود امن ادمین باید احراز هویت سمت سرور متصل شود.");
+}
+
+function renderAdmin(){
+let p=orders.filter(x=>x.status==="pending").length;
+let a=orders.filter(x=>x.status==="accepted").length;
+let r=orders.filter(x=>x.status==="rejected").length;
+
+s1.textContent=orders.length;
+s2.textContent=p;
+s3.textContent=a;
+s4.textContent=r;
+
+document.getElementById("orders").innerHTML=orders.length?orders.map((x,i)=>`
+<div class="order">
+<b>سفارش #${i+1}</b>
+<p>👤 ${x.name}</p>
+<p>📞 ${x.phone}</p>
+<p>📅 ${x.date}</p>
+<p>🛒 ${x.items.map(a=>a.name+" — "+money(a.price)).join("<br>")}</p>
+<p>💰 ${money(x.total)}</p>
+${x.note?`<p>📝 ${x.note}</p>`:""}
+<span class="status ${x.status}">
+${x.status==="pending"?"در انتظار":x.status==="accepted"?"تأیید شده":"رد شده"}
+</span>
+<div class="adminbuttons">
+<button class="ok" onclick="changeStatus(${x.id},'accepted')">✅ قبول</button>
+<button class="no" onclick="changeStatus(${x.id},'rejected')">❌ رد</button>
+<button class="del" onclick="deleteOrder(${x.id})">🗑 حذف</button>
+</div>
+</div>`).join(""):"<p>سفارشی وجود ندارد.</p>";
+
+adminServers.innerHTML=servers.map((x,i)=>`
+<div class="order">
+<b>${x.name}</b><p>${money(x.price)}</p>
+<button class="del" onclick="deleteServer(${i})">🗑 حذف</button>
+</div>`).join("");
+
+adminNews.innerHTML=news.map((x,i)=>`
+<div class="order">
+<b>${x.title}</b><p>${x.text}</p>
+<button class="del" onclick="deleteNews(${i})">🗑 حذف</button>
+</div>`).join("");
+}
+
+function changeStatus(id,status){
+let x=orders.find(o=>o.id===id);
+if(!x)return;
+x.status=status;save();renderAdmin();
+if(status==="accepted")
+alert("✅ سفارش تأیید شد.\nپشتیبانی در اپلیکیشن بله: ۰۹۳۰۳۳۳۲۴۷۶");
+else
+alert("❌ سفارش رد شد.");
+}
+
+function deleteOrder(id){
+orders=orders.filter(x=>x.id!==id);save();renderAdmin();
+}
+
+function addServer(){
+let n=serverName.value.trim(),p=Number(serverPrice.value);
+if(!n||!p)return alert("نام و قیمت را وارد کنید.");
+servers.push({name:n,price:p});
+serverName.value="";serverPrice.value="";
+save();renderServers();renderAdmin();
+}
+
+function deleteServer(i){
+servers.splice(i,1);save();renderServers();renderAdmin();
+}
+
+function addNews(){
+let t=newsTitle.value.trim(),x=newsText.value.trim();
+if(!t||!x)return alert("عنوان و متن را وارد کنید.");
+news.unshift({title:t,text:x,date:new Date().toLocaleDateString("fa-IR")});
+newsTitle.value="";newsText.value="";
+save();renderNews();renderAdmin();
+}
+
+function deleteNews(i){
+news.splice(i,1);save();renderNews();renderAdmin();
+}
+
+function exitAdmin(){
+document.getElementById("admin").style.display="none";
+document.getElementById("site").style.display="block";
+}
+
+renderServers();
+renderNews();
+updateCart();
+</script>
+</body>
+</html>
